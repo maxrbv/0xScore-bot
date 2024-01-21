@@ -1,0 +1,12 @@
+from aiogram.utils.keyboard import InlineKeyboardBuilder
+
+from tgbot.callbacks.main_callback import MainCallback
+
+
+KEYBOARD_UPDATES = "Upcoming updates"
+
+
+def keyboard_main_builder():
+    builder = InlineKeyboardBuilder()
+    builder.button(text=KEYBOARD_UPDATES, callback_data=MainCallback(type="updates"))
+    return builder.as_markup()
