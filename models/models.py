@@ -8,7 +8,7 @@ class Campaign(Base):
     __tablename__ = 'campaigns'
 
     id = Column(Integer, primary_key=True)
-    inner_id = Column(Integer, nullable=False)
+    inner_id = Column(Integer, nullable=False, unique=True)
     project_name = Column(String(length=250), nullable=True)
     image_url = Column(String(length=50), nullable=True)
     min_score = Column(Integer, nullable=True)

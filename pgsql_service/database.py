@@ -1,5 +1,6 @@
 from logging import Logger
 
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -22,8 +23,18 @@ class PgsqlManager:
         self._cur_session = self._session_factory()
         async with self._engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all, checkfirst=True)
-        self._logger.info(
-            f'[PgsqlManager:init] - Successfully connected to {self._cfg.pgsql.host}:{self._cfg.pgsql.port} and initialized models')
+        self._logger.info(f'[PgsqlManager:init] - Successfully connected to {self._cfg.pgsql.host}:{self._cfg.pgsql.port} and initialized models')
+
+    async def get_all_campaign_ids(self):
+        try:
+            async with self._engine.connect() as connection:
+                query = select(Campaign.inner_id)
+                result = await connection.execute(query)
+                campaign_ids = [row[0] for row in result]
+                return campaign_ids
+        except Exception as e:
+            self._logger.error(f"Error retrieving campaign ids from the database: {e}")
+            return []
 
     async def add_campaign_info(self, data: list):
         for row in data:
@@ -34,3 +45,5 @@ class PgsqlManager:
             except Exception as e:
                 await self._cur_session.rollback()
                 self._logger.error(f'[PgsqlManager:add_campaign_info] - Error adding call record: {e}')
+
+
