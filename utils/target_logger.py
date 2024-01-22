@@ -24,7 +24,7 @@ class ColorLogger(logging.Logger):
         if self.phone:
             fmt = f'{self.phone} | {self.session_id} | %(asctime)s | %(levelname)8s | %(message)s'
         else:
-            fmt = f'{self.session_id} | %(asctime)s | %(levelname)8s | %(message)s'
+            fmt = f'{self.session_id} | %(asctime)s | %(levelname)4s | %(message)s'
         self.formatter = logging.Formatter(fmt, datefmt='%Y-%m-%d %H:%M:%S')
 
     def _get_color_code(self, levelname):

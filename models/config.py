@@ -16,9 +16,18 @@ class Requests(BaseModel):
     timeout: int
 
 
+class Pgsql(BaseModel):
+    user: str
+    password: str
+    host: str
+    port: int
+    dbname: str
+
+
 class Config(BaseModel):
     tgbot: TgBot
     requests: Requests
+    pgsql: Pgsql
 
 
 def read_yaml_file() -> Config:
