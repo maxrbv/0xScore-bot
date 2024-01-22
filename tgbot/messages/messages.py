@@ -10,7 +10,7 @@ UPDATES_MESSAGE = "*Upcoming Updates:*\n\n" \
                   "📊 Personal quest completion statistics\n" \
                   "📜 Display of your currently uncompleted quests\n" \
                   "🎯 Filtering option of uncompleted quests by wallet's minimum score, prize type, number of tasks, and guaranteed score count\n\n" \
-                  "We're working to help you with enchancing 0xScoreParser experience\. keep up to date with new updates\!"
+                  "We're working to help you with enchancing 0xScoreParser experience\. Keep up to date with new updates\!"
 
 
 def create_quest_message(quest: Campaign) -> str:
