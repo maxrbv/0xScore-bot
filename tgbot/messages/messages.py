@@ -1,7 +1,7 @@
 from models.models import Campaign
 
 START_MESSAGE = "Welcome to *0xScoreParser*\! 🤖\n\n" \
-                "*0xScoreParser* is your bot that provides detailed information and descriptions of all the latest ongoing quests of [0xScore quests](https://app.0xscore.io/quests)\n\n" \
+                "*0xScoreParser* is your bot that provides detailed information and descriptions of all the latest ongoing [0xScore quests](https://app.0xscore.io/quests)\n\n" \
                 "This bot will be constantly updated\. We are working to enhance new features for you\. Stay updated on all upcoming changes by using the command /updates or press *Upcoming updates* button\n\n" \
                 "Don't hesitate to reach out if you have any questions or suggestions\. Enjoy your experience\!"
 
