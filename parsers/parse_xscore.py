@@ -48,7 +48,7 @@ class ZeroXScoreParser:
             await self._pgsql_manager.add_campaign_info(data=data)
             # TODO: tg bot alert
 
-    async def _process_campaigns(self, campaigns_list: list) -> list[dict]:
+    async def _process_campaigns(self, campaigns_list: list) -> list[dict] | None:
         if campaigns_list:
             data = []
             for campaign in campaigns_list:

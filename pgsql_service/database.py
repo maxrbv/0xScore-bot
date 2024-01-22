@@ -1,3 +1,4 @@
+import datetime
 from logging import Logger
 
 from sqlalchemy import select
@@ -33,7 +34,7 @@ class PgsqlManager:
                 campaign_ids = [row[0] for row in result]
                 return campaign_ids
         except Exception as e:
-            self._logger.error(f"Error retrieving campaign ids from the database: {e}")
+            self._logger.error(f"[PgsqlManager:get_all_campaign_ids] - Error retrieving campaign ids from the database: {e}")
             return []
 
     async def add_campaign_info(self, data: list):
@@ -46,4 +47,15 @@ class PgsqlManager:
                 await self._cur_session.rollback()
                 self._logger.error(f'[PgsqlManager:add_campaign_info] - Error adding call record: {e}')
 
-
+    async def get_ongoing_quests(self):
+        try:
+            async with self._engine.connect() as connection:
+                current_time = datetime.datetime.utcnow()
+                query = select(Campaign).where((Campaign.end_date > current_time) | (Campaign.end_date == None))
+                result = await connection.execute(query)
+                ongoing_quests = [row for row in result]
+                ongoing_quests = [Campaign(*row) for row in ongoing_quests]
+                return ongoing_quests
+        except Exception as e:
+            self._logger.error(f"Error retrieving ongoing quests from the database: {e}")
+            return None
