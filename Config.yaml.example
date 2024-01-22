@@ -1,0 +1,15 @@
+tgbot:
+  token: 'token'
+  allowed_updates:
+    - message
+    - callback_query
+
+requests:
+  timeout: 1200
+
+pgsql:
+  user: 'postgres'
+  password: 'postgres'
+  host: 'localhost'
+  port: 5432
+  dbname: 'postgres'
