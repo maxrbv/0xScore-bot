@@ -17,16 +17,15 @@ def create_quest_message(quest: Campaign) -> str:
     end_date = quest.end_date.strftime('%Y.%m.%d').replace('.', '\\.') if quest.end_date else "Unlimited"
     winners_count = quest.winners_count if quest.winners_count != 0 else "Everyone"
     return \
-        f"[*Link*](https://app.0xscore.io/campaign/{quest.inner_id})\n" \
         f"*Project name:* _{quest.project_name}_\n" \
         f"*Min wallet score:* _{quest.min_score}_\n" \
         f"*Rewards:*\n" \
         f"  • Reward: _{quest.reward_text}_\n" \
         f"  • Winners: _{winners_count}_\n" \
         f"  • Points: _{quest.reward_points}_\n" \
-        f"*Active until*: _{end_date}_"
-
-# f"[*Project twitter*]({quest.twitter_url})\n" if quest.twitter_url else ''\
+        f"*Active until*: _{end_date}_\n\n" \
+        f"[*0xScore Link*](https://app.0xscore.io/campaign/{quest.inner_id})" \
+        # f"[*Project twitter*]({quest.twitter_url})\n" if quest.twitter_url else ''\
 # f"[*Project discord*]({quest.discord_url})\n" if quest.discord_url else ''\
 # f"[*Project website*]({quest.site_url})\n" if quest.site_url else ''\
 

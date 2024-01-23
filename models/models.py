@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, DateTime
+from sqlalchemy import Column, String, Integer, DateTime, func
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -44,3 +44,21 @@ class Campaign(Base):
             f"end_date={self.end_date}"
             f")>"
         )
+
+
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, nullable=False)
+    user_name = Column(String(length=250), nullable=True)
+    start_date = Column(DateTime, nullable=True, default=func.now())
+
+
+class UserInteraction(Base):
+    __tablename__ = "user_interactions"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, nullable=False)
+    action = Column(String(length=250), nullable=False)
+    action_time = Column(DateTime, nullable=True, default=func.now())

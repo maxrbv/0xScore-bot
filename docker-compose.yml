@@ -1,0 +1,34 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - "6432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile-app
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/postgres
+    command: python app.py
+
+  updater:
+    build:
+      context: .
+      dockerfile: Dockerfile-updater
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/postgres
+    command: python updater.py
